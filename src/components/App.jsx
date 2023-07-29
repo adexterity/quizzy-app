@@ -104,27 +104,7 @@ const reducer = (state, action)=>{
     
     case 'finish':
       const newHighScore = state.points > state.highScore ? state.points : state.highScore
-      const updateHighScore = (newHighScore)=>{
-        fetch('http://localhost:8000/questions',{
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({highscore: newHighScore}),
-          
-        })
-        .then((res)=>{
-          if(!res.ok){
-            throw new Error('failed to upload new highscore to the server')
-          }
-          dispatch({type: 'highScoreUpdated', payload: newHighScore})
-        })
-        .catch((error)=>{
-          console.log(error)
-        });
-      }
-
-      updateHighScore(newHighScore)
+      
      
 
       return{
@@ -133,10 +113,6 @@ const reducer = (state, action)=>{
         
       
       }
-      case 'highScoreUpdated' :
-        return{
-          ...state, highScore: action.payload,
-        }
       
 
     case 'tick':
