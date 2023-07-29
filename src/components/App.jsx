@@ -13,6 +13,7 @@ import QuestionHTML from './QuestionHTML';
 import QuestionCSS from './QuestionCSS';
 import QuestionJavascript from './QuestionJavascript';
 import QuestionReact from './QuestionReact';
+import QuestionData from './QuestionData';
 
 
 
@@ -193,7 +194,10 @@ function App() {
   
   const [{questions, questionHtml, questionCss, questionJavascript, questionReact,numQuestion, maxPossiblePoint, highScore, activeSection, status, index, answer, points, timeRemaining}, dispatch] = useReducer(reducer, initialState);
      
-  // send request json server to fetch the questions
+  const getQuestions = (data)=>{
+    dispatch({type: 'dataReceived', payload: data})
+  }
+  /* // send request json server to fetch the questions
   useEffect(()=>{
     
     try{
@@ -213,31 +217,18 @@ function App() {
         dispatch({type: 'dataFailed'});
         
       })
-
-      //request to get highScore
-      /* fetch('http://localhost:8000/highScore')
-      .then((res)=>{
-        if(!res.ok){
-          throw new Error('failed to fetch highscore')
-        }
-        return res.json()
-      })
-      .then((data)=>{
-        dispatch({type:'dataReceived', payload: data})
-      })
-      .catch((e)=>{
-        console.log(e)
-      })
- */     
+     
     }catch(e){
       console.log(e);
     }
       
         
   }, []);
-  
+ */
+
   return (
     <div className='app'>
+      <QuestionData getQuestions={getQuestions}/>
       <Header />
 
       <main className='main'>

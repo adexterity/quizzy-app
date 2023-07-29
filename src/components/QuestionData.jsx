@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 const QuestionData = ({getQuestions}) => {
 
@@ -968,7 +968,11 @@ const QuestionData = ({getQuestions}) => {
           }
         ];
 
-        getQuestions(questions)
+        useEffect(()=>{
+
+            getQuestions(questions)
+        }, [])
+
       
 
  return (

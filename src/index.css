@@ -289,8 +289,11 @@ progress {
     width: 80%;
   }
   .timer{
-    margin-left: 20rem
+    margin-left: 10rem
   }
+   .btn.btn-ui{
+    margin-right: 10rem;
+   }
 
 }
 @media screen and (max-width:600px){
@@ -315,7 +318,8 @@ progress {
   
   h2 {
     font-size: 2.1rem;
-    margin-bottom: 2rem;
+    margin: 2rem auto;
+    width: 80%;
     text-align: center;
 
   }
@@ -350,6 +354,11 @@ progress {
  } 
 }
 
+.result{
+  margin: 1.6rem auto;
+  width: 80%;
+}
+
 @media screen and (max-width: 473px) {
   .progress{
     width: 60%;
@@ -361,4 +370,8 @@ progress {
     font-size: 1.2rem;
     max-width: 60%;
   } 
+  .result{
+    
+    width: 60%;
+  }
 }
