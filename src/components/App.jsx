@@ -24,27 +24,32 @@ const SECS_PER_QUESTION = 15
 const reducer = (state, action)=>{
   switch(action.type){
     case 'dataReceived':
-      const allQuestions = action.payload
+      
       return {
         ...state, 
         questions: action.payload,
-        questionHtml: allQuestions.filter((question)=> {
+        questionHtml: action.payload.filter((question)=> {
           return question.category === 'HTML'
           
         }),
-        questionCss: state.questions.filter((question)=> {
+        questionCss: action.payload.filter((question)=> {
           return question.category === 'CSS'
         }),
-        questionJavascript: state.questions.filter((question)=> {
+        questionJavascript: action.payload.filter((question)=> {
           return question.category === 'JavaScript'
         }),
-        questionReact: state.questions.filter((question)=> {
+        questionReact: action.payload.filter((question)=> {
           return question.category === 'React'
         }),
-        //retrieve the highscore form json server
-        highScore: action.payload[0].highscore,
+        
         status: 'ready'
       }
+
+    case 'loadHighScore' :
+      return{
+        ...state, highScore: action.payload
+      }
+
     case 'dataFailed':
       return{
         ...state,
@@ -106,7 +111,8 @@ const reducer = (state, action)=>{
     case 'finish':
       const newHighScore = state.points > state.highScore ? state.points : state.highScore
       
-     
+     //store the new highscore into the localstorage
+     localStorage.setItem('highScore', newHighScore);
 
       return{
         ...state, status: 'finished', 
@@ -174,6 +180,12 @@ function App() {
   const getQuestions = (data)=>{
     dispatch({type: 'dataReceived', payload: data})
   }
+
+  useEffect(()=>{
+    const storedHighScore = localStorage.getItem('highScore');
+    dispatch({type: 'loadHighScore', payload: Number(storedHighScore)})
+  }, [])
+
   /* // send request json server to fetch the questions
   useEffect(()=>{
     
