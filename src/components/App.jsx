@@ -24,10 +24,11 @@ const SECS_PER_QUESTION = 15
 const reducer = (state, action)=>{
   switch(action.type){
     case 'dataReceived':
+      const allQuestions = action.payload
       return {
         ...state, 
         questions: action.payload,
-        questionHtml: state.questions.filter((question)=> {
+        questionHtml: allQuestions.filter((question)=> {
           return question.category === 'HTML'
           
         }),
